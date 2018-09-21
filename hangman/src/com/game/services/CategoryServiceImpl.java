@@ -1,6 +1,7 @@
 package com.game.services;
 
 import com.game.entities.Category;
+import com.game.entities.Word;
 import com.game.repositories.CategoryRepository;
 import com.game.repositories.CategoryRepositoryImpl;
 
@@ -20,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categoryList = categoryRepository.getAll();
         for (Category category: categoryList)
         {
-            System.out.println(category.getId()+" "+category.getName());
+            System.out.println(category.getName().substring(1));
         }
     }
 }

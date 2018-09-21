@@ -1,6 +1,7 @@
 package com.game.repositories;
 
 import com.game.entities.Category;
+import com.game.entities.Word;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,9 +11,7 @@ import java.util.Scanner;
 
 public class CategoryRepositoryImpl implements CategoryRepository {
 
-    private static final String FILE_NAME = "dictionary-data";
     private List<Category> categories;
-    private int idCounter;
 
     public CategoryRepositoryImpl(){
         categories = new ArrayList<>();
@@ -25,7 +24,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         while(reader.hasNext()) {
             String line = reader.nextLine();
             if(line.startsWith("_")){
-                this.add(line.substring(1));
+                this.add(line);
             }
         }
         reader.close();
@@ -35,11 +34,20 @@ public class CategoryRepositoryImpl implements CategoryRepository {
 
     @Override
     public void add(String name) {
-        Category category = new Category(nextId(),name);
+        Category category = new Category(name);
         categories.add(category);
     }
 
-    private int nextId(){
-        return idCounter++;
+    /*TODO*/
+    @Override
+    public Category findCategoryByName(String name) throws FileNotFoundException {
+        for (Category category : this.getAll()) {
+            System.out.println(category.getName().substring(1) + " == " + name);
+            if (category.getName().substring(1).equals(name)){
+                return category;
+            }
+        }
+
+        return null;
     }
 }

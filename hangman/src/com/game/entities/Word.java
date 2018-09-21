@@ -1,22 +1,16 @@
 package com.game.entities;
 
 public class Word {
-    private int id;
-    private int name;
+    private String name;
 
-    public int getId() {
-        return id;
+    public Word(String name){
+        this.name = name;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 }
