@@ -7,5 +7,5 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface CategoryService {
-    void getAll() throws FileNotFoundException;
+    List<String> getAll() throws FileNotFoundException;
 }

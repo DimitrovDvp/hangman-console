@@ -13,18 +13,20 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public CategoryServiceImpl() {
+    public CategoryServiceImpl() throws FileNotFoundException {
         this.categoryRepository = new CategoryRepositoryImpl();
     }
 
     @Override
-    public void getAll() throws FileNotFoundException {
-        List<Category> categoryList = categoryRepository.getAll();
+    public List<String> getAll() throws FileNotFoundException {
+        List<Category> categoryList = categoryRepository.getCategories();
         List<String> categoryNames = new ArrayList<>();
 
         for (Category category: categoryList)
         {
             categoryNames.add(category.getName().substring(1));
         }
+
+        return categoryNames;
     }
 }

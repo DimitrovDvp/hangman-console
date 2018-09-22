@@ -14,7 +14,7 @@ public class WordServiceImpl implements WordService {
 
     private final WordRepository wordRepository;
 
-    public WordServiceImpl() {
+    public WordServiceImpl() throws FileNotFoundException {
         this.wordRepository = new WordRepositoryImpl();
     }
 
@@ -22,8 +22,11 @@ public class WordServiceImpl implements WordService {
     public Word getRandomWord(String categoryName) throws FileNotFoundException {
         Random rand = new Random();
         List<Word> words = wordRepository.getWordsByCategoryName(categoryName);
-        int randomWordIndex = rand.nextInt(words.size());
+        if (words.size() == 0){
+            return null;
+        }
 
+        int randomWordIndex = rand.nextInt(words.size());
         return words.get(randomWordIndex);
     }
 
@@ -46,10 +49,10 @@ public class WordServiceImpl implements WordService {
     @Override
     public List<Integer> guessLetter(char letter, Word word) {
         List<Integer> occurrenceIndices = new ArrayList<>();
-        char[] lettersArray = word.getName().toCharArray();
+        char[] lettersArray = word.getName().toLowerCase().toCharArray();
 
         for (int i = 0; i < lettersArray.length; i++) {
-            if (lettersArray[i] == letter){
+            if (lettersArray[i] == Character.toLowerCase(letter)){
                 occurrenceIndices.add(i);
             }
         }

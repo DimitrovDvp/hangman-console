@@ -13,7 +13,7 @@ public class WordRepositoryImpl implements WordRepository {
 
     private final CategoryRepository categoryRepository;
 
-    public WordRepositoryImpl(){
+    public WordRepositoryImpl() throws FileNotFoundException {
         categoryRepository = new CategoryRepositoryImpl();
     }
     @Override
@@ -24,7 +24,7 @@ public class WordRepositoryImpl implements WordRepository {
 
         while(reader.hasNext()) {
             String line = reader.nextLine();
-            if(line.substring(1).equals(categoryName)){
+            if(line.toLowerCase().substring(1).equals(categoryName.toLowerCase())){
                 while(true){
                     Word word = new Word(reader.nextLine());
                     if(word.getName().startsWith("_") || !reader.hasNext()){

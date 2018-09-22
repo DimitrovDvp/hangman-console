@@ -6,11 +6,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface CategoryRepository extends BaseRepository {
-    List<Category> getAll() throws FileNotFoundException;
+    List<Category> initCategories() throws FileNotFoundException;
+
+    List<Category> getCategories();
 
     void add(String name);
-
-    Category findCategoryByName(String name) throws FileNotFoundException;
-
-
 }
