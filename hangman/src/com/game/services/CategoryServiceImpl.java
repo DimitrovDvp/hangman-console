@@ -6,6 +6,7 @@ import com.game.repositories.CategoryRepository;
 import com.game.repositories.CategoryRepositoryImpl;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService {
@@ -17,11 +18,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void printAll() throws FileNotFoundException {
+    public void getAll() throws FileNotFoundException {
         List<Category> categoryList = categoryRepository.getAll();
+        List<String> categoryNames = new ArrayList<>();
+
         for (Category category: categoryList)
         {
-            System.out.println(category.getName().substring(1));
+            categoryNames.add(category.getName().substring(1));
         }
     }
 }
