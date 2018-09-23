@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface CategoryService {
     List<String> getAll() throws FileNotFoundException;
+
+    String getCategory() throws FileNotFoundException;
 }

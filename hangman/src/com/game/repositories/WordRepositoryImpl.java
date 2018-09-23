@@ -34,10 +34,9 @@ public class WordRepositoryImpl implements WordRepository {
                     }
                 }
             }
-
         }
-        reader.close();
 
+        reader.close();
         return words;
     }
 }

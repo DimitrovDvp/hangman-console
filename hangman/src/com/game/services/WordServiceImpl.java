@@ -9,6 +9,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class WordServiceImpl implements WordService {
 
@@ -34,7 +35,6 @@ public class WordServiceImpl implements WordService {
     public String hideWord(Word word) {
         char[] lettersArray = word.getName().toCharArray();
         StringBuilder sb = new StringBuilder();
-
         for (int i = 0; i < lettersArray.length; i++) {
             if (Character.isSpaceChar(lettersArray[i])){
                 sb.append(" ");
@@ -48,10 +48,10 @@ public class WordServiceImpl implements WordService {
 
     @Override
     public List<Integer> guessLetter(char letter, Word word) {
+        int indexer = 0;
         List<Integer> occurrenceIndices = new ArrayList<>();
         char[] lettersArray = word.getName().toLowerCase().toCharArray();
 
-        int indexer = 0;
         for (int i = 0; i < lettersArray.length; i++) {
             if (lettersArray[i] == Character.toLowerCase(letter)){
                 if (i == 0){
@@ -61,6 +61,7 @@ public class WordServiceImpl implements WordService {
                 } else {
                     occurrenceIndices.add(indexer - 2);
                 }
+
             } else if (Character.isWhitespace(lettersArray[i])){
                 indexer --;
             }
@@ -69,5 +70,25 @@ public class WordServiceImpl implements WordService {
         }
 
         return occurrenceIndices;
+    }
+
+    @Override
+    public String revealLetters(char letter, List<Integer> letterIndices, String word){
+        char[] wordLetters = word.toCharArray();
+        for (Integer index : letterIndices) {
+            wordLetters[index] = letter;
+        }
+
+        return String.valueOf(wordLetters);
+    }
+
+    @Override
+    public boolean isGameFinished(String word){
+        boolean isFinished = false;
+        if(!word.contains("_")){
+            isFinished = true;
+        }
+
+        return isFinished;
     }
 }

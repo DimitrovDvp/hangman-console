@@ -32,8 +32,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
                 this.add(line);
             }
         }
-        reader.close();
 
+        reader.close();
         return categories;
     }
 

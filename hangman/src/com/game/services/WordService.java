@@ -11,4 +11,8 @@ public interface WordService {
     String hideWord(Word word);
 
     List<Integer> guessLetter(char letter, Word word);
+
+    String revealLetters(char letter, List<Integer> letterIndices, String word);
+
+    boolean isGameFinished(String word);
 }
