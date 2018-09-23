@@ -41,7 +41,7 @@ public class GameView {
                 if(!isGameFinished(currentProgressWord)){
                     System.out.println("Attempts left: " + attempts);
                     System.out.println("Current word/phrase:  " + currentProgressWord);
-                    System.out.println("Please enter a letter");
+                    System.out.println("Please enter a letter:");
                     char letterGuess = scan.next().charAt(0);
                     List<Integer> letterPositions = wordService.guessLetter(letterGuess, word);
 
@@ -56,9 +56,7 @@ public class GameView {
                     attempts = 10;
                     System.out.println("Congratulations you have revealed the word/phrase: " + currentProgressWord);
                     System.out.println("Current score: " + playerScore);
-                } else {
-                    System.out.println("You are hanged");
-                    System.out.println("The word was: " + word.getName());
+                    break;
                 }
             }
 
@@ -72,12 +70,13 @@ public class GameView {
     }
 
     private String revealLetters(char letter, List<Integer> letterIndices, String word){
-        StringBuilder wordProgress = new StringBuilder(word);
-        for (Integer index : letterIndices) {
-            wordProgress.setCharAt(index, letter);
-        }
 
-        return wordProgress.toString();
+        char[] wordLetters = word.toCharArray();
+        for (Integer index : letterIndices) {
+            wordLetters[index] = letter;
+        }
+        String result = String.valueOf(wordLetters);
+        return result;
     }
 
     private boolean isGameFinished(String word){

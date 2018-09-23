@@ -51,10 +51,21 @@ public class WordServiceImpl implements WordService {
         List<Integer> occurrenceIndices = new ArrayList<>();
         char[] lettersArray = word.getName().toLowerCase().toCharArray();
 
+        int indexer = 0;
         for (int i = 0; i < lettersArray.length; i++) {
             if (lettersArray[i] == Character.toLowerCase(letter)){
-                occurrenceIndices.add(i);
+                if (i == 0){
+                    occurrenceIndices.add(i);
+                } else if(i != lettersArray.length){
+                    occurrenceIndices.add(indexer);
+                } else {
+                    occurrenceIndices.add(indexer - 2);
+                }
+            } else if (Character.isWhitespace(lettersArray[i])){
+                indexer --;
             }
+
+            indexer += 2;
         }
 
         return occurrenceIndices;
